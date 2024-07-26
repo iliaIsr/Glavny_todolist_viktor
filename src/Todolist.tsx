@@ -16,6 +16,7 @@ type PropsType = {
 	filter: FilterValuesType
 	removeTodolist:(removeTodolist:string)=>void
 	changeTaskTitle:(todolistId: string, taskId:string, newTitle:string)=>void
+	changeTodoListTitle:(todolistId: string,newTitle:string)=>void
 
 }
 
@@ -23,7 +24,7 @@ export const Todolist = (props: PropsType) => {
 	const removeTodolistHandler=()=>{
 		props.removeTodolist(todolistId)
 	}
-	const {title, tasks, filter, removeTask, changeFilter, addTask, todolistId, changeTaskStatus, changeTaskTitle} = props
+	const {title, tasks, filter, removeTask, changeFilter, addTask, todolistId, changeTaskStatus, changeTaskTitle,changeTodoListTitle} = props
 
 
 
@@ -41,12 +42,22 @@ export const Todolist = (props: PropsType) => {
 	// const changeTaskStatus=(newTitle:string)=>{
 	//
 	// }
+	const obertkaChangeTodoListTitle=(newTitle:string)=>{
+		changeTodoListTitle(todolistId, newTitle)
+	}
+	// const getTaskHandlerId=(taskID:string)=>{
+	// 	console.log(taskID)
+	// }
+	const obertkaChangeTaskTitle=(taskId:string, newTitle:string)=>{
 
+		changeTaskTitle(todolistId,taskId,newTitle)
+	}
 
 	return (
 		<div>
 			<div className={'todolist-title-container'}>
-			<h3>{title}</h3>
+			{/*<h3>{title}</h3>*/}
+				<h3><EditableSpan oldTitle={title} obertkaChangeTaskTitle={ obertkaChangeTodoListTitle}/></h3>
 			<Button title={'x'} onClick={removeTodolistHandler}/>
 			</div>
 			<AddItemForm
@@ -56,6 +67,9 @@ export const Todolist = (props: PropsType) => {
 					? <p>Тасок нет</p>
 					: <ul>
 						{tasks.map((task) => {
+							// const getTaskID=()=>{
+							// 	getTaskHandlerId(task.id)
+							// }
 
 							const removeTaskHandler = () => {
 								removeTask(props.todolistId, task.id)
@@ -65,15 +79,15 @@ export const Todolist = (props: PropsType) => {
 								const newStatusValue = e.currentTarget.checked
 								changeTaskStatus(todolistId,task.id, newStatusValue)
 							}
-							const obertkaChangeTaskTitle=(newTitle:string)=>{
-								changeTaskTitle(todolistId,task.id,newTitle)
-							}
+
 							return <li key={task.id} className={task.isDone ? 'is-done' : ''}>
 								<input type="checkbox" checked={task.isDone} onChange={changeTaskStatusHandler}/>
 								<EditableSpan
+									// onChange={task.id}
 									oldTitle={task.title}
-									obertkaChangeTaskTitle={obertkaChangeTaskTitle}
+									obertkaChangeTaskTitle={(newTitle)=>obertkaChangeTaskTitle(task.id, newTitle)}
 								/>
+								{/*kak eto rabotaet?*/}
 								<Button onClick={removeTaskHandler} title={'x'}/>
 							</li>
 						})}

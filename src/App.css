@@ -1,11 +1,11 @@
-.App {
+/* .App {
   padding: 30px;
   display: flex;
 }
 
 .App > div {
   margin-right: 50px;
-}
+} */
 
 .error {
   border: red 1px solid;
@@ -21,8 +21,4 @@
 
 .is-done {
   opacity: 0.5;
-}
-.todolist-title-container {
-  display: flex;
-  align-items: center;
 }

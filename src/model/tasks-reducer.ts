@@ -50,7 +50,7 @@ export const tasksReducer = (state: TasksStateType , action: ActionsType):TasksS
 			// return rest
 		}
 		default:
-			throw new Error("error")
+			return state
 		}}
 
 export const RemoveTaskAC=(todolistId:string,taskId:string)=>{

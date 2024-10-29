@@ -1,5 +1,5 @@
 import {FilterValuesType, TaskType, TodolistType} from "./AppWithRedux";
-import {ChangeEvent, memo, useCallback} from "react";
+import {ChangeEvent, memo, useCallback, useMemo} from "react";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import IconButton from '@mui/material/IconButton';
@@ -11,6 +11,8 @@ import ListItem from '@mui/material/ListItem';
 import Box from "@mui/material/Box";
 import {filterButtonsContainerSx, getListItemSx} from "./Todolist.styles";
 import {ButtonProps} from "@mui/material/Button/Button";
+import Task from "./state/Task";
+import {TaskWithRedux} from "./TaskWithRedux";
 
 
 type PropsType = {
@@ -64,13 +66,18 @@ export const Todolist =memo (({title,
 
 	let tasks = tasksProps
 
-	if (filter === 'active') {
-		tasks = tasks.filter(task => !task.isDone)
-	}
+	tasks=useMemo(()=>{
 
-	if (filter === 'completed') {
-		tasks = tasks.filter(task => task.isDone)
-	}
+		if (filter === 'active') {
+			tasks = tasks.filter(task => !task.isDone)
+		}
+
+		if (filter === 'completed') {
+			tasks = tasks.filter(task => task.isDone)
+		}
+		return tasks
+	},[tasks, filter])
+
 	return (
 		<div>
 			<div className={"todolist-title-container"}>
@@ -84,30 +91,14 @@ export const Todolist =memo (({title,
 			{
 				tasksProps.length === 0
 					? <p>Тасок нет</p>
+					// : <List>
+					// 	{tasks.map((task) => {
+					// 		return <Task key={task.id} title={title} task={task} todolistId={todolistId} updateTask={updateTask} removeTask={removeTask} changeTaskStatus={changeTaskStatus}/>
+					// 	})}
+					// </List>
 					: <List>
 						{tasks.map((task) => {
-
-							const removeTaskHandler = () => {
-								removeTask(task.id, todolistId)
-							}
-
-							const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
-								const newStatusValue = e.currentTarget.checked
-								changeTaskStatus(task.id, newStatusValue, todolistId)
-							}
-
-							const changeTaskTitleHandler = useCallback((title: string) => {
-								updateTask(todolistId, task.id, title)
-							},[todolistId,task.id,title])
-							return <ListItem key={task.id} sx={getListItemSx(task.isDone)}>
-								<div>
-									<Checkbox checked={task.isDone} onChange={changeTaskStatusHandler}/>
-									<EditableSpan value={task.title} onChange={changeTaskTitleHandler}/>
-								</div>
-								<IconButton onClick={removeTaskHandler}>
-									<DeleteIcon/>
-								</IconButton>
-							</ListItem>
+							return <TaskWithRedux key={task.id} task={task} todolistId={todolistId}/>
 						})}
 					</List>
 			}

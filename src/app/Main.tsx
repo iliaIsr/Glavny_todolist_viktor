@@ -1,36 +1,29 @@
-import {useDispatch} from "react-redux";
-
-import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
-
-import {AddItemForm} from "../common/components/AddItemForm";
-
-
+// import Grid from "@mui/material/Unstable_Grid2";
+import Grid from "@mui/material/Grid";
 import React from "react";
-import {Grid} from "@mui/material";
+import {AddItemForm} from "../common/components/AddItemForm/AddItemForm";
+import {useAppDispatch} from "../common/hooks/useAppDispatch";
+import {addTodolistAC} from "../features/todolists/model/todolists-reducer";
 import {Todolists} from "../features/todolists/ui/Todolists/Todolists";
-import {addTodolistAC} from "../model/todolists-reducer";
-
 
 export const Main = () => {
 
-    const dispatch = useDispatch()
+	const dispatch = useAppDispatch()
 
-    const addTodolist = (title: string) => {
-        dispatch(addTodolistAC(title))
-    }
+	const addTodolist = (title: string) => {
+		dispatch(addTodolistAC(title))
+	}
 
-    return (
-        <>
-            <CssBaseline/>
-            <Container fixed>
-                <Grid container sx={{mb: '30px'}}>
-                    <AddItemForm addItem={addTodolist}/>
-                </Grid>
-                <Grid container spacing={4}>
-                    <Todolists/>
-                </Grid>
-            </Container>
-        </>
-    );
+	return (
+		<Container fixed>
+			<Grid container sx={{mb: '30px'}}>
+				<AddItemForm addItem={addTodolist}/>
+			</Grid>
+
+			<Grid container spacing={4}>
+				<Todolists/>
+			</Grid>
+		</Container>
+	)
 }

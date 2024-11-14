@@ -1,6 +1,6 @@
-import { instance } from "../../../common/instance/instance"
+import { instance } from "common/instance"
+import { BaseResponse } from "common/types"
 import { DomainTask, GetTasksResponse, UpdateTaskModel } from "./tasksApi.types"
-import { BaseResponse } from "../../../common/types/types"
 
 export const tasksApi = {
   getTasks(todolistId: string) {
@@ -11,13 +11,11 @@ export const tasksApi = {
     return instance.post<BaseResponse<{ item: DomainTask }>>(`todo-lists/${todolistId}/tasks`, { title })
   },
   deleteTask(payload: { todolistId: string; taskId: string }) {
-    const { todolistId, taskId } = payload
-    return instance.delete<BaseResponse>(
-      `https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}/tasks/${taskId}`,
-    )
+    const { taskId, todolistId } = payload
+    return instance.delete<BaseResponse>(`todo-lists/${todolistId}/tasks/${taskId}`)
   },
   updateTask(payload: { todolistId: string; taskId: string; model: UpdateTaskModel }) {
-    const { todolistId, taskId, model } = payload
+    const { taskId, todolistId, model } = payload
     return instance.put<BaseResponse<{ item: DomainTask }>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
   },
 }

@@ -1,8 +1,11 @@
-import { DomainTask, FieldError } from "../../features/todolists/api/tasksApi.types"
+export type FieldError = {
+  error: string
+  field: string
+}
 
-export type BaseResponse<T = {}> = {
+export type BaseResponse<D = {}> = {
   resultCode: number
   messages: string[]
   fieldsErrors: FieldError[]
-  data: T
+  data: D
 }

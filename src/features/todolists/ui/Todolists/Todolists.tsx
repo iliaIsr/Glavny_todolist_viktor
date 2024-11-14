@@ -1,13 +1,18 @@
 import Paper from "@mui/material/Paper"
-
-import React from "react"
-import { useAppSelector } from "../../../../common/hooks/useAppSelector"
+import React, { useEffect } from "react"
+import { useAppSelector } from "common/hooks"
 import { selectTodolists } from "../../model/todolistsSelectors"
 import { Todolist } from "./Todolist/Todolist"
 import { Grid } from "@mui/material"
+import { todolistsApi } from "../../api/todolistsApi"
 
 export const Todolists = () => {
   const todolists = useAppSelector(selectTodolists)
+
+  todolistsApi.getTodolists().then((res) => {
+    const todolists = res.data
+    console.log(todolists)
+  })
 
   return (
     <>

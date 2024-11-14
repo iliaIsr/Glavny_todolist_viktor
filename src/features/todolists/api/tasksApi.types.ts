@@ -1,4 +1,5 @@
-import { TaskPriority, TaskStatus } from "../lib/enums/enum"
+import { TaskPriority, TaskStatus } from "common/enums"
+
 export type GetTasksResponse = {
   error: string | null
   totalCount: number
@@ -25,9 +26,4 @@ export type UpdateTaskModel = {
   priority: TaskPriority
   startDate: string
   deadline: string
-}
-
-export type FieldError = {
-  error: string
-  field: string
 }

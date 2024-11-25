@@ -2,24 +2,20 @@ import Paper from "@mui/material/Paper"
 
 import React, { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "common/hooks"
+import { fetchTodolistsTC } from "../../model/todolists-reducer"
 import { selectTodolists } from "../../model/todolistsSelectors"
 import { Todolist } from "./Todolist/Todolist"
 import { Grid } from "@mui/material"
-import { todolistsApi } from "../../api/todolistsApi"
-import { fetchTodolistsThunk, setTodolistsAC } from "../../model/todolists-reducer"
-
-import { AppDispatch } from "app/store"
-import { useDispatch } from "react-redux"
-import { addTaskTC } from "../../model/tasks-reducer"
 
 export const Todolists = () => {
   const todolists = useAppSelector(selectTodolists)
+
   const dispatch = useAppDispatch()
-  // const dispatch= useAppDispatch()
 
   useEffect(() => {
-    dispatch(fetchTodolistsThunk)
+    dispatch(fetchTodolistsTC())
   }, [])
+
   return (
     <>
       {todolists.map((tl) => {

@@ -19,7 +19,6 @@ export const Main = () => {
       <Grid container sx={{ mb: "30px" }}>
         <AddItemForm addItem={addTodolist} />
       </Grid>
-
       <Grid container spacing={4}>
         <Todolists />
       </Grid>

@@ -4,14 +4,12 @@ import "./index.css"
 import { Provider } from "react-redux"
 import { App } from "./app/App"
 import { store } from "./app/store"
-import { BrowserRouter, Route, Routes } from "react-router"
-import { Login } from "@mui/icons-material"
+import { BrowserRouter } from "react-router-dom"
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      {/* redux*/}
       <App />
     </Provider>
   </BrowserRouter>,

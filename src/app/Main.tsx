@@ -5,7 +5,7 @@ import { AddItemForm } from "common/components"
 import { useAppDispatch } from "common/hooks"
 import { addTodolistTC } from "../features/todolists/model/todolists-reducer"
 import { Todolists } from "../features/todolists/ui/Todolists/Todolists"
-import { Grid } from "@mui/material"
+import Grid from "@mui/material/Grid"
 
 export const Main = () => {
   const dispatch = useAppDispatch()

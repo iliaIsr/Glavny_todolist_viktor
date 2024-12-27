@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "common/hooks"
 import { fetchTodolistsTC } from "../../model/todolists-reducer"
 import { selectTodolists } from "../../model/todolistsSelectors"
 import { Todolist } from "./Todolist/Todolist"
-import Grid from "@mui/material/Grid"
+import { Grid } from "@mui/material"
 
 export const Todolists = () => {
   const todolists = useAppSelector(selectTodolists)

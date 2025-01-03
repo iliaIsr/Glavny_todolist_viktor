@@ -9,14 +9,16 @@ import { useNavigate } from "react-router"
 import { Path } from "common/routing/Routing"
 
 export const Main = () => {
+  debugger
   const dispatch = useAppDispatch()
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
   const navigate = useNavigate()
-
   const addTodolist = (title: string) => {
     dispatch(addTodolistTC(title))
   }
   useEffect(() => {
+    debugger
+    console.log("isLoggedIn", isLoggedIn)
     if (!isLoggedIn) {
       navigate(Path.Login)
     }

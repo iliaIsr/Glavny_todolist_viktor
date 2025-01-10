@@ -1,9 +1,6 @@
-export type AuthResponse = {
-  resultCode: number
-  messages: Array<string>
-  data: DataResponseAuth
-}
-
-type DataResponseAuth = {
-  userId: number
+export type LoginArgs = {
+  email: string
+  password: string
+  rememberMe?: boolean
+  captcha?: string
 }

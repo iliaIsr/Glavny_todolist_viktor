@@ -2,8 +2,8 @@ import Paper from "@mui/material/Paper"
 
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "common/hooks"
-import { fetchTodolistsTC } from "../../model/todolistsSlice"
-import { selectTodolists } from "../../model/todolistsSelectors"
+import { fetchTodolistsTC, selectTodolists } from "../../model/todolistsSlice"
+
 import { Todolist } from "./Todolist/Todolist"
 import Grid from "@mui/material/Grid"
 

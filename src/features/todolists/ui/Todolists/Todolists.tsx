@@ -3,7 +3,6 @@ import Paper from "@mui/material/Paper"
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "common/hooks"
 import { fetchTodolistsTC, selectTodolists } from "../../model/todolistsSlice"
-
 import { Todolist } from "./Todolist/Todolist"
 import Grid from "@mui/material/Grid"
 
@@ -16,7 +15,7 @@ export const Todolists = () => {
     dispatch(fetchTodolistsTC())
   }, [])
 
-  return (
+  return (``
     <>
       {todolists.map((tl) => {
         return (

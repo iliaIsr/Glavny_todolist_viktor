@@ -1,15 +1,12 @@
 import Paper from "@mui/material/Paper"
 
-import { useEffect, useState } from "react"
-import { useAppDispatch, useAppSelector } from "common/hooks"
-import { fetchTodolistsTC, selectTodolists } from "../../model/todolistsSlice"
+import { useGetTodolistsQuery } from "../../api/todolistsApi"
 import { Todolist } from "./Todolist/Todolist"
 import Grid from "@mui/material/Grid"
-import { useGetTodolistsQuery } from "../../api/_todolistsApi"
 
 export const Todolists = () => {
   const { data: todolists } = useGetTodolistsQuery()
-  console.log("todolists", todolists)
+
   return (
     <>
       {todolists?.map((tl) => {

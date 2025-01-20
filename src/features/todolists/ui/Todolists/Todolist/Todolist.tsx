@@ -1,25 +1,19 @@
 import { AddItemForm } from "common/components"
-import { useAppDispatch } from "common/hooks"
-import { addTaskTC } from "../../../model/tasksSlice"
+import { useAddTaskMutation } from "../../../api/tasksApi"
 import { DomainTodolist } from "../../../model/todolistsSlice"
-
 import { FilterTasksButtons } from "./FilterTasksButtons/FilterTasksButtons"
 import { Tasks } from "./Tasks/Tasks"
 import { TodolistTitle } from "./TodolistTitle/TodolistTitle"
-import { useAddTaskMutation } from "../../../api/_tasksApi"
 
 type Props = {
   todolist: DomainTodolist
 }
 
 export const Todolist = ({ todolist }: Props) => {
-  const [data] = useAddTaskMutation()
-  console.log("addTask", data)
-  const dispatch = useAppDispatch()
+  const [addTask] = useAddTaskMutation()
 
   const addTaskCallback = (title: string) => {
-    // dispatch(addTaskTC({ title, todolistId: todolist.id }))
-    data({ title, todolistId: todolist.id })
+    addTask({ title, todolistId: todolist.id })
   }
 
   return (

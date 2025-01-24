@@ -7,7 +7,7 @@ import { Skeleton } from "@mui/material"
 import { TodolistSkeleton } from "../skeletons/TodolistSkeleton/TodolistSkeleton"
 
 export const Todolists = () => {
-  const { data, data: todolists, isLoading, isFetching } = useGetTodolistsQuery()
+  const { data: todolists, isLoading, isFetching } = useGetTodolistsQuery()
 
   if (isLoading) {
     return (
